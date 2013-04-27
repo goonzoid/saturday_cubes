@@ -12,7 +12,9 @@ int boxRotataYSpeed = 1;
 int spacing = 250;
 int centreRectWidth = 126;
 int centreRectHeight = 70;
-int boxSize, maxBoxSize = 600;
+int boxSize = 200;
+int maxBoxSize = 700;
+boolean movingBox = false;
 
 void setup() {
   size(1280, 720, P3D);
@@ -63,9 +65,11 @@ void theBox() {
   rotateX(radians(frameCount * boxRotataYSpeed));
   fill(0, 0, 0);
   box(boxSize);
-  boxSize -= 2;
-  if (boxSize <= 0) {
-    boxSize = maxBoxSize;
+  if (movingBox) {
+    boxSize -= 2;
+    if (boxSize <= 0) {
+      boxSize = maxBoxSize;
+    }
   }
   popMatrix();
 }
@@ -81,6 +85,33 @@ void draw() {
   centreRectangleAndLines();
   movingRectangles();
   theBox();
+}
+
+void keyTyped() {
+  switch (int(key)) {
+    case 49: boxSize = 50;
+             break;
+    case 50: boxSize = 75;
+             break;
+    case 51: boxSize = 125;
+             break;
+    case 52: boxSize = 175;
+             break;
+    case 53: boxSize = 250;
+             break;
+    case 54: boxSize = 325;
+             break;
+    case 55: boxSize = 400;
+             break;
+    case 56: boxSize = 500;
+             break;
+    case 57: boxSize = 600;
+             break;
+    case 48: movingBox = !movingBox;
+             break;
+    default: println(int(key));
+             break;
+  }
 }
 
 void stop() {
