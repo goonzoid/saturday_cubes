@@ -18,11 +18,19 @@ void changeDepth() {
   }
 }
 
-void centreRectangle() {
+void centreRectangleAndLines() {
   fill(255);
   int rectX = width/2 - centreRectWidth/2;
   int rectY = height/2 - centreRectHeight/2;
   rect(rectX, rectY, centreRectWidth, centreRectHeight);
+  lines(rectX, rectY);
+}
+
+void lines(int x, int y) {
+  line(0, 0, x, y);
+  line(0, height, x, y + centreRectHeight);
+  line(width, 0, x, y + centreRectHeight);
+  line(width, height, x + centreRectWidth, y + centreRectHeight);
 }
 
 void movingRectangles() {
@@ -38,6 +46,6 @@ void movingRectangles() {
 void draw() {
   background(0);
   changeDepth();
-  centreRectangle();
+  centreRectangleAndLines();
   movingRectangles();
 }
