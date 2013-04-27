@@ -10,8 +10,8 @@ float zSpeed = 5;
 int boxRotateXSpeed = 3;
 int boxRotataYSpeed = 1;
 int spacing = 250;
-int centreRectWidth = 126;
-int centreRectHeight = 70;
+int centreRectWidth = 130;
+int centreRectHeight = 74;
 int boxSize = 200;
 int maxBoxSize = 700;
 boolean movingBox = false;
@@ -36,18 +36,13 @@ void changeDepth() {
   }
 }
 
-void centreRectangleAndLines() {
+void linesToCentreRect() {
   fill(255);
-  int rectX = width/2 - centreRectWidth/2;
-  int rectY = height/2 - centreRectHeight/2;
-  rect(rectX, rectY, centreRectWidth, centreRectHeight);
-  lines(rectX, rectY);
-}
-
-void lines(int x, int y) {
+  int x = width/2 - centreRectWidth/2;
+  int y = height/2 - centreRectHeight/2;
   line(0, 0, x, y);
   line(0, height, x, y + centreRectHeight);
-  line(width, 0, x, y + centreRectHeight);
+  line(width, 0, x + centreRectWidth, y);
   line(width, height, x + centreRectWidth, y + centreRectHeight);
 }
 
@@ -89,7 +84,7 @@ void draw() {
   background(0);
   setStrokeWeightFromVolume();
   changeDepth();
-  centreRectangleAndLines();
+  linesToCentreRect();
   movingRectangles();
   theBox();
 }
