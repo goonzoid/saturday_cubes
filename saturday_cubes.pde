@@ -3,6 +3,7 @@ float zSpeed = 5;
 int spacing = 250;
 int centreRectWidth = 126;
 int centreRectHeight = 70;
+int boxSize, maxBoxSize = 600;
 
 void setup() {
   size(1280, 720, P3D);
@@ -35,7 +36,7 @@ void lines(int x, int y) {
 
 void movingRectangles() {
   noFill();
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 50; i++) {
     pushMatrix();
     translate(0, 0, -i * spacing - depth);
     rect(0, 0, width, height);
@@ -43,9 +44,24 @@ void movingRectangles() {
   }
 }
 
+void theBox() {
+  pushMatrix();
+  translate(width * 0.5, height * 0.5);
+  rotateY(radians(frameCount * 4));
+  rotateX(radians(frameCount * 2));
+  fill(0, 0, 0);
+  box(boxSize);
+  boxSize -= 2;
+  if (boxSize <= 0) {
+    boxSize = maxBoxSize;
+  }
+  popMatrix();
+}
+
 void draw() {
   background(0);
   changeDepth();
   centreRectangleAndLines();
   movingRectangles();
+  theBox();
 }
