@@ -77,13 +77,17 @@ void theBox() {
   popMatrix();
 }
 
-void draw() {
+void setStrokeWeightFromVolume() {
   vol = 0;
   for (int i = 0; i < in.bufferSize(); i++) {
     vol += abs(in.mix.get(i));
   }
   strokeWeight(max(1, vol/10));
+}
+
+void draw() {
   background(0);
+  setStrokeWeightFromVolume();
   changeDepth();
   centreRectangleAndLines();
   movingRectangles();
