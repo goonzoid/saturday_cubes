@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+
+Minim minim;
+AudioInput in;
+
+float vol;
 float depth = 0;
 float zSpeed = 5;
 int boxRotateXSpeed = 3;
@@ -12,6 +19,9 @@ void setup() {
   smooth();
   stroke(255);
   strokeWeight(2);
+
+  minim = new Minim(this);
+  in = minim.getLineIn(Minim.STEREO, 512);
 }
 
 void changeDepth() {
@@ -38,7 +48,7 @@ void lines(int x, int y) {
 
 void movingRectangles() {
   noFill();
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 25; i++) {
     pushMatrix();
     translate(0, 0, -i * spacing - depth);
     rect(0, 0, width, height);
@@ -61,10 +71,21 @@ void theBox() {
 }
 
 void draw() {
+  vol = 0;
+  for (int i = 0; i < in.bufferSize(); i++) {
+    vol += abs(in.mix.get(i));
+  }
+  strokeWeight(max(1, vol/10));
   background(0);
   changeDepth();
   centreRectangleAndLines();
   movingRectangles();
   theBox();
+}
+
+void stop() {
+  in.close();
+  minim.stop();
+  super.stop();
 }
 
