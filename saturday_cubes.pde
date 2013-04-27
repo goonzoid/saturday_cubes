@@ -15,6 +15,9 @@ int centreRectHeight = 70;
 int boxSize = 200;
 int maxBoxSize = 700;
 boolean movingBox = false;
+float boxFactor1 = 10;
+float boxFactor2 = 5;
+float boxFactor3 = 0.5;
 
 void setup() {
   size(1280, 720, P3D);
@@ -63,7 +66,7 @@ void theBox() {
   translate(width * 0.5, height * 0.5);
   rotateY(radians(frameCount * boxRotateXSpeed));
   rotateX(radians(frameCount * boxRotataYSpeed));
-  fill(0, 0, 0);
+  fill(vol/boxFactor1, vol/boxFactor2, vol/boxFactor3);
   box(boxSize);
   if (movingBox) {
     boxSize -= 2;
