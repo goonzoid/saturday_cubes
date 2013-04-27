@@ -1,5 +1,7 @@
 float depth = 0;
 float zSpeed = 5;
+int boxRotateXSpeed = 3;
+int boxRotataYSpeed = 1;
 int spacing = 250;
 int centreRectWidth = 126;
 int centreRectHeight = 70;
@@ -47,8 +49,8 @@ void movingRectangles() {
 void theBox() {
   pushMatrix();
   translate(width * 0.5, height * 0.5);
-  rotateY(radians(frameCount * 4));
-  rotateX(radians(frameCount * 2));
+  rotateY(radians(frameCount * boxRotateXSpeed));
+  rotateX(radians(frameCount * boxRotataYSpeed));
   fill(0, 0, 0);
   box(boxSize);
   boxSize -= 2;
@@ -65,3 +67,4 @@ void draw() {
   movingRectangles();
   theBox();
 }
+
