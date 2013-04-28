@@ -1,9 +1,13 @@
+import themidibus.*;
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
+MidiBus midi;
 Minim minim;
 AudioInput in;
 
+// midi channels are zero indexed!
+int midiChannel = 0;
 float vol;
 
 float depth = 0;
@@ -26,7 +30,7 @@ void setup() {
   smooth();
   stroke(255);
   strokeWeight(2);
-
+  midi = new MidiBus(this, "MPK mini", -1);
   minim = new Minim(this);
   in = minim.getLineIn(Minim.STEREO, 512);
 }
@@ -92,24 +96,6 @@ void draw() {
 
 void keyTyped() {
   switch (int(key)) {
-    case 49: boxSize = 50;
-             break;
-    case 50: boxSize = 75;
-             break;
-    case 51: boxSize = 125;
-             break;
-    case 52: boxSize = 175;
-             break;
-    case 53: boxSize = 250;
-             break;
-    case 54: boxSize = 325;
-             break;
-    case 55: boxSize = 400;
-             break;
-    case 56: boxSize = 500;
-             break;
-    case 57: boxSize = 600;
-             break;
     case 48: movingBox = !movingBox;
              break;
     default: println(int(key));
@@ -117,7 +103,19 @@ void keyTyped() {
   }
 }
 
+void controllerChange(int channel, int number, int value) {
+  if (channel != midiChannel) return;
+  switch (number) {
+    case 1: boxSize = value * 2;
+            break;
+    case 2: tunnelSpeed = value;
+            break;
+    default: break;
+  }
+}
+
 void stop() {
+  midi.stop();
   in.close();
   minim.stop();
   super.stop();
