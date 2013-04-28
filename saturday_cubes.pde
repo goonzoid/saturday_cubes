@@ -37,7 +37,6 @@ void changeDepth() {
 }
 
 void linesToCentreRect() {
-  fill(255);
   int x = width/2 - centreRectWidth/2;
   int y = height/2 - centreRectHeight/2;
   line(0, 0, x, y);
