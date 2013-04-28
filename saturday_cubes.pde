@@ -57,7 +57,7 @@ void movingRectangles() {
 
 void theBox() {
   pushMatrix();
-  translate(width * 0.5, height * 0.5);
+  translate(width * 0.5, height * 0.5, 100);
   rotateY(radians(frameCount * boxRotateXSpeed));
   rotateX(radians(frameCount * boxRotataYSpeed));
   fill(vol/boxFactor1, vol/boxFactor2, vol/boxFactor3);
