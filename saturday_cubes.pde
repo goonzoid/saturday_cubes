@@ -5,19 +5,21 @@ Minim minim;
 AudioInput in;
 
 float vol;
+
 float depth = 0;
-float zSpeed = 5;
-float boxRotateXSpeed = 0.3;
-float boxRotataYSpeed = 0.1;
+float tunnelSpeed = 5;
 int spacing = 250;
-int centreRectWidth = 130;
-int centreRectHeight = 74;
+int centreRectWidth = 138;
+int centreRectHeight = 78;
+
 int boxSize = 200;
 int maxBoxSize = 700;
-boolean movingBox = false;
+float boxRotateXSpeed = 0.3;
+float boxRotataYSpeed = 0.1;
 float boxFactor1 = 10;
 float boxFactor2 = 5;
 float boxFactor3 = 0.5;
+boolean movingBox = false;
 
 void setup() {
   size(1280, 720, P3D);
@@ -30,7 +32,7 @@ void setup() {
 }
 
 void changeDepth() {
-  depth -= zSpeed;
+  depth -= tunnelSpeed;
   if (depth <= -1000) {
     depth = 0;
   }
