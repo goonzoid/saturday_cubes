@@ -19,7 +19,8 @@ int centreRectHeight = 78;
 int boxSize = 200;
 int maxBoxSize = 700;
 float boxRotateXSpeed = 0.3;
-float boxRotataYSpeed = 0.1;
+float boxRotateYSpeed = 0.1;
+float boxRotateZSpeed = 0.1;
 float boxFactor1 = 10;
 float boxFactor2 = 5;
 float boxFactor3 = 0.5;
@@ -64,8 +65,9 @@ void movingRectangles() {
 void theBox() {
   pushMatrix();
   translate(width * 0.5, height * 0.5, 100);
-  rotateY(radians(frameCount * boxRotateXSpeed));
-  rotateX(radians(frameCount * boxRotataYSpeed));
+  rotateX(radians(frameCount * boxRotateXSpeed));
+  rotateY(radians(frameCount * boxRotateYSpeed));
+  rotateZ(radians(frameCount * boxRotateZSpeed));
   fill(vol/boxFactor1, vol/boxFactor2, vol/boxFactor3);
   box(boxSize);
   if (movingBox) {
