@@ -1,7 +1,9 @@
+import codeanticode.syphon.*;
 import themidibus.*;
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
+SyphonServer syphonServer;
 MidiBus midi;
 Minim minim;
 AudioInput in;
@@ -31,6 +33,7 @@ void setup() {
   smooth();
   stroke(255);
   strokeWeight(2);
+  syphonServer = new SyphonServer(this, "Processing frame server");
   midi = new MidiBus(this, "MPK mini", -1);
   minim = new Minim(this);
   in = minim.getLineIn(Minim.STEREO, 512);
@@ -94,6 +97,7 @@ void draw() {
   linesToCentreRect();
   movingRectangles();
   theBox();
+  syphonServer.sendImage(g);
 }
 
 void keyTyped() {
